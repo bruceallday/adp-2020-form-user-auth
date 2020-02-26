@@ -1,0 +1,26 @@
+{
+  "name": "adp_2020_node_day_1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "COOKIE_SECRET=bad_secret PGUSER=postgres PGDATABASE=cats_data npx nodemon ./src/index.js",
+    "migrate": "DATABASE_URL=postgres://postgres@localhost:5432/cats_data node-pg-migrate",
+    "db:create": "npx createdbjs cats_data",
+    "db:drop": "npx dropdbjs cats_data || true",
+    "db:reset": "yarn db:drop && yarn db:create && yarn migrate up"
+  },
+  "dependencies": {
+    "bcrypt": "^4.0.0",
+    "connect-pg-simple": "^6.1.0",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "node-pg-migrate": "^4.2.2",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "pgtools": "^0.3.0"
+  }
+}

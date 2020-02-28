@@ -8,33 +8,18 @@ import {
 
 import Login from './login/login-component'
 import Signup from './sign-up/sign-up.component'
+import Cats from './cats/cats.component'
+import Home from './home/home.component'
 
 const App = () => (
     <Router>
         <Switch>
 
             <Route path="/" exact>
-                <div>
-                     <h2>
-                        INDEX
-                     </h2>
-
-                    <h5>
-                        <Link to="/login">
-                            LOG IN
-                        </Link>
-                    </h5> 
-
-                    <h5>
-                        <Link to="/signup">
-                            SIGN UP
-                        </Link>
-                    </h5>
-
-                </div>
+                <Home/>
             </Route>
 
-            <Route path="/login">
+             <Route path="/login">
                 <Login />
             </Route>
 
@@ -42,8 +27,8 @@ const App = () => (
                 <Signup />
             </Route>
 
-            <Route path="/cats/">
-                CATS
+            <Route path="/cats">
+                <Cats />
             </Route>
 
         </Switch>

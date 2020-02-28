@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -9,10 +10,13 @@ const Login = () => {
 
     const { handleSubmit, register, errors}  = useForm()
     const [ serverError, setServerError ] = useState()
+    const history = useHistory()
 
     const onSubmit = async values => {
         setServerError(null)
         const res = await fetch('http://localhost:3000/login', {
+            credentials: 'include',
+            mode: 'cors',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -22,10 +26,14 @@ const Login = () => {
         })
 
         const responseData = await res.json()
+
         console.log(responseData)
 
         if (responseData.error != null){
             setServerError(responseData.error.message)
+        }else{
+            localStorage.setItem('csrfToken', responseData.csrfToken)
+            history.push('/')
         }
     }
    

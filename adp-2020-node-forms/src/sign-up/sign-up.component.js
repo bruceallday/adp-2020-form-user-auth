@@ -18,7 +18,7 @@ const Signup = () => {
             return
         }
 
-        console.log("sent data")
+        console.log("SENT DATA")
 
         setServerError(null)
         const res = await fetch('http://localhost:3000/signup', {

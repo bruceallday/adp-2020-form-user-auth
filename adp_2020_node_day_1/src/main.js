@@ -159,10 +159,10 @@ app.post('/logout', async (req, res) => {
 //----------------USER LOG OUT----------------------------------------------------
 
 //----------------INSERTING A ROW INTO OUR CAT DATABASE WITH A POST REQUEST---------------------------
-app.post('/cats/', async (req, res) => {
-    const { cat } = req.body
+app.post('/cats', async (req, res) => {
+    const { name, color } = req.body
 
-    if (cat === null) {
+    if (name == null || color == null) {
         res.status(500).json({
             message: "'cat' param missing from JSON"
         })
@@ -174,7 +174,7 @@ app.post('/cats/', async (req, res) => {
             `INSERT INTO cats (name, color)
                 VALUES ($1, $2)
                 RETURNING *
-        `, [cat.name, cat.color])
+        `, [name, color])
         res.json(catResult.rows[0])
     } catch (e) {
         onError(e, res)

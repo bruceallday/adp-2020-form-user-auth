@@ -10,14 +10,11 @@ const Signup = () => {
     const { handleSubmit, register, errors } = useForm()
     const [serverError, setServerError] = useState()
 
-    const required = <Typography>Required</Typography>
-
     const onSubmit = async values => {
         console.log(values)
 
         if (values.password !== values.confirmpassword){
-            console.log("PASSWORDS DONT MATCH")
-
+            setServerError('Passwords do not match')
             return
         }
 
@@ -104,8 +101,7 @@ const Signup = () => {
                     variant="contained"
                     type="submit"
                     color="primary"
-                    fullWidth
-                >SIGN UP
+                    fullWidth>SIGN UP
                 </Button>
             </form>
         </div>

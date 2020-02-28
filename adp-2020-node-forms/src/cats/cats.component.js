@@ -65,7 +65,10 @@ const Cats = () => {
     }
 
     return(
-        <div>
+        <div style={{
+            width: 500,
+            marginLeft: 'auto',
+            marginRight: 'auto'}}>
 
             <Typography>
                 Add your cat to the database
@@ -110,8 +113,6 @@ const Cats = () => {
                     fullWidth
                     >Submit    
                 </Button>
-
-                
                     {cats.map((cat) => (
                         <Typography key={cat.id}>
                             {cat.name }
@@ -119,10 +120,6 @@ const Cats = () => {
                             { cat.color}
                         </Typography>
                     ))}
-                
-
-
-
             </form>
         </div>
     )

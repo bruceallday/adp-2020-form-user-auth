@@ -1,6 +1,5 @@
 import React from 'react'
-import { Typography, Button, AppBar, Toolbar } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
+import { Typography, AppBar, Toolbar } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import {
     Link,
@@ -22,7 +21,6 @@ const Home = () => {
                 <AppBar>
                     <Toolbar>
                         <IconButton edge="start" color="inherit" aria-label="menu">
-                            <MenuIcon />
                         </IconButton>
                         <Link
                             to='/'
@@ -38,7 +36,7 @@ const Home = () => {
                         </Link>
                         <Link to='/cats' className={styles.links}>
                             <Typography>
-                                Show me the cats
+                                Cats
                             </Typography>
                         </Link>
                     

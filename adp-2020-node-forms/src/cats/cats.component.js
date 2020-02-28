@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Typography, TextField, Button } from '@material-ui/core'
+import { Typography, AppBar, Toolbar, TextField, Button, Link } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
+
+import { useStyles } from './cats.styles'
 
 const Cats = () => {
+    const history = useHistory()
     const csrfToken = localStorage.getItem('csrfToken')
+    const isLoggedIn = csrfToken !== null
     const [cats, setCats] = useState()
     const [error, setError] = useState()
     const { handleSubmit, register, errors } = useForm()
+    const styles = useStyles()
 
     useEffect(() => {
         (async () => {
@@ -70,12 +78,26 @@ const Cats = () => {
             marginLeft: 'auto',
             marginRight: 'auto'}}>
 
-            <Typography>
-                Add your cat to the database
-            </Typography>
+            <AppBar>
+                <Toolbar>
+                    <Typography>
+                        Add your cat to the database
+                    </Typography>
+                    <Link
+                        to='/'
+                        className={styles.links}
+                        onClick={() => {
+                            localStorage.removeItem('csrfToken')
+                            history.push('/')
+                        }}>
+                        <Typography className={styles.links}>
+                            Log Out
+                        </Typography>
+                    </Link>
+                </Toolbar>
+            </AppBar>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-            
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form} >
                 <TextField
                     type='text'
                     name='name'
@@ -115,9 +137,7 @@ const Cats = () => {
                 </Button>
                     {cats.map((cat) => (
                         <Typography key={cat.id}>
-                            {cat.name }
-                            is
-                            { cat.color}
+                            {`${cat.name} is ${cat.color}`}
                         </Typography>
                     ))}
             </form>

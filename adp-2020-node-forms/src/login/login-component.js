@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
+import { Typography, AppBar, Toolbar, TextField, Button } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 import { useForm } from 'react-hook-form'
+import { useStyles } from './login-styles'
 
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
     const { handleSubmit, register, errors}  = useForm()
     const [ serverError, setServerError ] = useState()
     const history = useHistory()
+    const styles = useStyles()
 
     const onSubmit = async values => {
         setServerError(null)
@@ -43,10 +45,15 @@ const Login = () => {
             marginLeft: 'auto',
             marginRight: 'auto'
         }}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Typography>
-                    LOG IN
-                </Typography>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                <AppBar>
+                    <Toolbar>
+                        <Typography>
+                            Peaae log in below
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+
                 <TextField
                     type ="text"
                     name="name"

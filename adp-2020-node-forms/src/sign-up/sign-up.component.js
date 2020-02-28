@@ -5,14 +5,26 @@ import Typography from '@material-ui/core/Typography'
 import { useForm } from 'react-hook-form'
 
 
-const Login = () => {
+const Signup = () => {
 
-    const { handleSubmit, register, errors}  = useForm()
-    const [ serverError, setServerError ] = useState()
+    const { handleSubmit, register, errors } = useForm()
+    const [serverError, setServerError] = useState()
+
+    const required = <Typography>Required</Typography>
 
     const onSubmit = async values => {
+        console.log(values)
+
+        if (values.password !== values.confirmpassword){
+            console.log("PASSWORDS DONT MATCH")
+
+            return
+        }
+
+        console.log("sent data")
+
         setServerError(null)
-        const res = await fetch('http://localhost:3000/login', {
+        const res = await fetch('http://localhost:3000/signup', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -24,32 +36,33 @@ const Login = () => {
         const responseData = await res.json()
         console.log(responseData)
 
-        if (responseData.error != null){
+        if (responseData.error != null) {
             setServerError(responseData.error.message)
         }
     }
-   
-    return(
+
+    return (
         <div style={{
             width: 500,
             marginLeft: 'auto',
             marginRight: 'auto'
         }}>
             <form onSubmit={handleSubmit(onSubmit)}>
+
                 <Typography>
-                    LOG IN
+                    SIGN UP
                 </Typography>
+
                 <TextField
-                    type ="text"
+                    type="text"
                     name="name"
-                    label="User Name" 
+                    label="User Name"
                     error={errors.name != null}
                     fullWidth
                     inputRef={register({
                         required: 'Required'
                     })}
                 />
-
                 <Typography color="error">
                     {errors.name && errors.name.message}
                 </Typography>
@@ -64,8 +77,22 @@ const Login = () => {
                         required: 'Required'
                     })}
                 />
+                <Typography color="error">
+                    {errors.password && errors.password.message}
+                </Typography>
 
-                <Typography>
+
+                <TextField
+                    name="confirmpassword"
+                    label="Confirm Password"
+                    type="password"
+                    error={errors.password != null}
+                    fullWidth
+                    inputRef={register({
+                        required: 'Required'
+                    })}
+                />
+                <Typography color="error">
                     {errors.password && errors.password.message}
                 </Typography>
 
@@ -78,11 +105,11 @@ const Login = () => {
                     type="submit"
                     color="primary"
                     fullWidth
-                    >LOG IN
+                >SIGN UP
                 </Button>
             </form>
         </div>
     )
 }
 
-export default Login
+export default Signup
